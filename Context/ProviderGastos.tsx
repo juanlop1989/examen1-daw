@@ -1,22 +1,29 @@
 'use client'
-import { Gastos } from '@/Modelos/Gastos';
-import React, { ReactNode, useContext, useState } from 'react';
-import { ContextGasto } from './ContextGastos';
-
-interface VistaGasto {
-    children: ReactNode;
-}
-
-export default function ProviderGastos({ children }: VistaGasto) {
-
-    //const [gastos, setGastos] = useState<Gastos[]>([]);
-    const [login, setLogin] = useState(String);
-    const [presupuesto, setPresupuesto] = useState(Number);
-    const [registroGastos, setRegistroGastos] = useState<Gastos[]>([]);
+import React, { createContext, useContext, useState } from 'react';
+import { Gastos } from '../Modelos/Gastos';
+import { GastosContextType } from './ContextGastos';
 
 
-}
 
-export function useContextGastos() {
-    return useContext(ContextGasto);
-}
+const GastosContext = createContext<GastosContextType | undefined>(undefined);
+
+
+
+export const useContextGastos = () => {
+    const context = useContext(GastosContext);
+    if (!context) {
+        throw new Error('useContextGastos debe ser usado dentro de un ProviderGastos');
+    }
+    return context;
+};
+
+export const ProviderGastos: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [gastos, setGastos] = useState<Gastos[]>([]);
+    const [presupuesto, setPresupuesto] = useState<number>(0);
+
+    return (
+        <GastosContext.Provider value={{ gastos, setGastos, presupuesto, setPresupuesto }}>
+            {children}
+        </GastosContext.Provider>
+    );
+};
