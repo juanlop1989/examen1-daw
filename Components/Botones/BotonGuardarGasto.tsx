@@ -1,4 +1,4 @@
-// BotonGuardarGasto.tsx
+
 'use client';
 import React from 'react';
 import { useContextGastos } from '@/Context/ProviderGastos';
@@ -23,8 +23,8 @@ const BotonGuardarGasto: React.FC<BotonGuardarGastoProps> = ({ gasto }) => {
         })
         .then(response => response.json())
         .then(data => {
-            // Actualiza la lista de gastos en el contexto
-            setGastos(prev => [...prev, data]); // Suponiendo que 'data' es el gasto guardado
+            
+            setGastos(prev => [...prev, data]); 
             alert('Gasto guardado con éxito!');
         })
         .catch(error => console.error('Error al guardar gasto:', error));

@@ -12,7 +12,6 @@ const RegistroGastosPage = () => {
     const [nuevoGasto, setNuevoGasto] = useState<Gastos>({ idgasto: 0, categoria: '', monto: 0, fecha: '' });
     const [isEditing, setIsEditing] = useState(false); 
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,26 +37,56 @@ const RegistroGastosPage = () => {
     };
 
     return (
-        <div className="container">
-            <Nav></Nav>
-            <h1>{isEditing ? "Actualizar Gasto" : "Registrar Nuevo Gasto"}</h1>
-            <input type="text" name="categoria" placeholder="Categoría" value={nuevoGasto.categoria} onChange={handleInputChange} className="form-control mb-2" />
-            <input type="number" name="monto" placeholder="Monto" value={nuevoGasto.monto} onChange={handleInputChange} className="form-control mb-2" />
-            <input type="date" name="fecha" value={nuevoGasto.fecha} onChange={handleInputChange} className="form-control mb-3" />
-            
-            {isEditing ? (
-                <BotonActualizarGasto gasto={nuevoGasto} />
-            ) : (
-                <BotonGuardarGasto gasto={nuevoGasto} />
-            )}
+        <div className="container d-flex flex-column align-items-center mt-5">
+            <Nav />
+            <h1 className="text-center mb-4">{isEditing ? "Actualizar Gasto" : "Registrar Nuevo Gasto"}</h1>
+            <div className="card p-4" style={{ width: '400px' }}>
+                <div className="mb-3">
+                    <input 
+                        type="text" 
+                        name="categoria" 
+                        placeholder="Categoría" 
+                        value={nuevoGasto.categoria} 
+                        onChange={handleInputChange} 
+                        className="form-control" 
+                    />
+                </div>
+                <div className="mb-3">
+                    <input 
+                        type="number" 
+                        name="monto" 
+                        placeholder="Monto" 
+                        value={nuevoGasto.monto} 
+                        onChange={handleInputChange} 
+                        className="form-control" 
+                    />
+                </div>
+                <div className="mb-3">
+                    <input 
+                        type="date" 
+                        name="fecha" 
+                        value={nuevoGasto.fecha} 
+                        onChange={handleInputChange} 
+                        className="form-control" 
+                    />
+                </div>
+                
+                {isEditing ? (
+                    <BotonActualizarGasto gasto={nuevoGasto} />
+                ) : (
+                    <BotonGuardarGasto gasto={nuevoGasto} />
+                )}
+            </div>
 
-            <h2>Lista de Gastos</h2>
-            <ul className="list-group">
+            <h2 className="mt-4">Lista de Gastos</h2>
+            <ul className="list-group mt-3 w-50">
                 {gastos.map(gastro => (
-                    <li key={gastro.idgasto} className="list-group-item">
+                    <li key={gastro.idgasto} className="list-group-item d-flex justify-content-between align-items-center">
                         {gastro.categoria}: ${gastro.monto} - {new Date(gastro.fecha).toLocaleDateString()}
-                        <button onClick={() => handleEditClick(gastro)} className="btn btn-warning btn-sm float-end">Editar</button>
-                        <BotonEliminarGasto idgasto={gastro.idgasto} /> 
+                        <div>
+                            <button onClick={() => handleEditClick(gastro)} className="btn btn-warning btn-sm me-2">Editar</button>
+                            <BotonEliminarGasto idgasto={gastro.idgasto} /> 
+                        </div>
                     </li>
                 ))}
             </ul>
