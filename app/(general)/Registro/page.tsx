@@ -82,7 +82,7 @@ const RegistroGastosPage = () => {
             <ul className="list-group mt-3 w-50">
                 {gastos.map(gastro => (
                     <li key={gastro.idgasto} className="list-group-item d-flex justify-content-between align-items-center">
-                        {gastro.categoria}: ${gastro.monto} - {new Date(gastro.fecha).toLocaleDateString()}
+                        {gastro.categoria}: L.{gastro.monto} - {new Date(gastro.fecha).toLocaleDateString()}
                         <div>
                             <button onClick={() => handleEditClick(gastro)} className="btn btn-warning btn-sm me-2">Editar</button>
                             <BotonEliminarGasto idgasto={gastro.idgasto} /> 

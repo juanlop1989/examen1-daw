@@ -31,7 +31,7 @@ const PresupuestoPage = () => {
                 <button onClick={handleGuardarPresupuesto} className="btn btn-primary w-100">
                     Guardar Presupuesto
                 </button>
-                <h2 className="mt-3 text-center">Presupuesto Asignado: ${presupuesto.toFixed(2)}</h2>
+                <h2 className="mt-3 text-center">Presupuesto Asignado: L. {presupuesto.toFixed(2)}</h2>
             </div>
         </div>
     );

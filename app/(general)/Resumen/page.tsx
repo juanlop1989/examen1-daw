@@ -25,16 +25,16 @@ const Resumen = () => {
             <Nav />
             <h1 className="text-center mb-4">Resumen de Gastos</h1>
             <div className="card p-4" style={{ width: '400px' }}>
-                <h2>Total Gastos: ${totalGastos.toFixed(2)}</h2>
-                <h3>Presupuesto Asignado: ${presupuesto.toFixed(2)}</h3>
-                <h3>Restante del Presupuesto: ${(presupuesto - totalGastos).toFixed(2)}</h3>
+                <h2>Total Gastos: L.{totalGastos.toFixed(2)}</h2>
+                <h3>Presupuesto Asignado: L.{presupuesto.toFixed(2)}</h3>
+                <h3>Restante del Presupuesto: L.{(presupuesto - totalGastos).toFixed(2)}</h3>
             </div>
 
             <h2 className="mt-4">Gastos por Categoría</h2>
             <ul className="list-group mt-3 w-50">
                 {Object.entries(gastosPorCategoria).map(([categoria, monto]) => (
                     <li key={categoria} className="list-group-item d-flex justify-content-between align-items-center">
-                        {categoria}: ${monto.toFixed(2)}
+                        {categoria}: L.{monto.toFixed(2)}
                     </li>
                 ))}
             </ul>
